@@ -16,6 +16,15 @@ public class GestioneClienti {
         readallClienti();
     }
 
+    public Cliente getClienteById(String id) {
+        for (Cliente cliente : allClienti) {
+            if (cliente.getId().equals(id)) {
+                return cliente;
+            }
+        }
+        return null; // Ritorna null se il cliente non viene trovato
+    }
+
     public void printallClienti() {
         System.out.println("Lista Clienti:");
         allClienti.forEach(v -> System.out.println(
@@ -25,7 +34,7 @@ public class GestioneClienti {
     public String chooseCliente() {
         System.out.println("Scegli il Cliente:");
         System.out.println("0) Nuovo Cliente");
-        allClienti.forEach(v -> System.out.println((allClienti.indexOf(v) + 1) + ") " + v.getDenominazione()));
+        printallClienti();
         Integer selection = numberInput("Scegliere Cliente: ", 0, allClienti.size());
         Cliente Cliente;
         if (selection == 0) {
