@@ -52,7 +52,7 @@ public class GestioneClienti {
 
     private Cliente createCliente() {
         try {
-            File myObj = new File("Clientes.txt");
+            File myObj = new File("Clienti.txt");
             if (myObj.createNewFile()) {
                 System.out.println("File creato: " + myObj.getName());
             } else {
