@@ -86,8 +86,9 @@ public class App {
             return;
         System.out.println("\n--- Fatture del cliente " + cliente + " ---");
         boolean trovato = false;
-        gdf.getDocFiscaliByCliente(cliente);
+        ArrayList<DocFiscale> docFiscali = gdf.getDocFiscaliByCliente(cliente);
 
+        docFiscali.stream().forEach((DocFiscale doc) -> doc.toString());
     }
 
     private static void elencoClienti() {
