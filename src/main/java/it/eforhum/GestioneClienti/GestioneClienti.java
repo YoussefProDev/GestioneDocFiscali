@@ -27,9 +27,12 @@ public class GestioneClienti {
     }
 
     public void printallClienti() {
-        System.out.println("Lista Clienti:");
-        allClienti.forEach(v -> System.out.println(
-                v.getId() + ") " + v.getDenominazione() + " - " + v.getPartitaIva() + " - " + v.getIndirizzo()));
+        if(allClienti.size()>0){
+
+            System.out.println("Lista Clienti:");
+            allClienti.forEach(v -> System.out.println(
+                    v.getId() + ") " + v.getDenominazione() + " - " + v.getPartitaIva() + " - " + v.getIndirizzo()));
+        }
     }
 
     public String chooseCliente() {
