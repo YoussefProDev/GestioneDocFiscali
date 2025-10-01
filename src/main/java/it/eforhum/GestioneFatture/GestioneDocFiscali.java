@@ -1,5 +1,12 @@
 package it.eforhum.GestioneFatture;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -7,14 +14,15 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.print.Doc;
-
+import static it.eforhum.App.DELIMITER;
 public class GestioneDocFiscali {
     HashMap<String, DocFiscale> docFiscali;
     HashMap<Integer, Integer> lastCodicePerAnno;
 
-    public GestioneDocFiscali() {
+    public GestioneDocFiscali() throws FileNotFoundException {
         docFiscali = new HashMap<>();
         lastCodicePerAnno = new HashMap<>();
+        riempiDaFile("docfiscali.txt");
     }
 
     public void addDocFiscale(String idCliente,  String data, String descrizione, double importo) {
@@ -67,5 +75,41 @@ public class GestioneDocFiscali {
         }
         return sb.toString();
     }
+
+    public void riempiDaFile(String filename) throws FileNotFoundException {
+    File file = new File(filename);
+        if (!file.exists()){
+           // throw FileNotFoundException; 
+           return;
+        }
+          
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null && !line.isEmpty()) {
+               
+                DocFiscale docFiscale = new DocFiscale(line);
+                this.docFiscali.put(docFiscale.getId(), docFiscale);
+                int anno = docFiscale.getData().getYear();
+                this.lastCodicePerAnno.put(anno, this.lastCodicePerAnno.getOrDefault(anno, 0) + 1);
+                
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void scriviFile(String filename) {
+        File file = new File(filename);
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+            for (DocFiscale docFiscale : docFiscali.values()) {
+                bw.write(docFiscale.prepare());
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
