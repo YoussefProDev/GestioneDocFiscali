@@ -75,7 +75,7 @@ public class App {
 
     private static void calcolaTotaleFatture() {
         int anno = numberInput("Inserisci l'anno per il calcolo del totale fatture: ");
-        double totale = gdf.calcolaTotaleFatture(anno);
+        double totale = gdf.getImportoTotAnnuale(anno);
 
         System.out.println("Totale fatture: €" + totale);
     }
