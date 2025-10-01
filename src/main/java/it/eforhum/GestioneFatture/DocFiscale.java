@@ -1,8 +1,8 @@
 package it.eforhum.GestioneFatture;
 
-import static it.eforhum.App.DELIMITER;
-
 import java.time.LocalDate;
+
+import static it.eforhum.App.DELIMITER;
 
 public class DocFiscale implements Comparable<DocFiscale> {
     private String descrizione, id, idCliente;
@@ -98,4 +98,9 @@ public class DocFiscale implements Comparable<DocFiscale> {
     public void setIdCliente(String idCliente) {
         this.idCliente = idCliente;
     }
+
+    public int getNumeroFattura() {
+        return numeroFattura;
+    }
+
 }

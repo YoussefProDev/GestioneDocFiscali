@@ -139,9 +139,14 @@ public class App {
             String input = SCANNER.nextLine().trim().replace("-", "/");
             try {
                 LocalDate date = LocalDate.parse(input, DateTimeFormatter.ofPattern("d/M/yyyy"));
+                if (date.getYear() < LocalDate.now().getYear()) {
+                    throw new Exception("Data non valida.");
+                }
                 return date.format(DateTimeFormatter.ISO_DATE);
             } catch (DateTimeParseException e) {
                 System.out.println("Data non valida, formato corretto: gg/MM/yyyy.");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
         }
     }
