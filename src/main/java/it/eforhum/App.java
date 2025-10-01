@@ -4,10 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 import it.eforhum.GestioneClienti.Cliente;
 import it.eforhum.GestioneClienti.GestioneClienti;
@@ -85,10 +83,13 @@ public class App {
         if (cliente == null)
             return;
         System.out.println("\n--- Fatture del cliente " + cliente + " ---");
-        boolean trovato = false;
-        ArrayList<DocFiscale> docFiscali = gdf.getDocFiscaliByCliente(cliente);
+        List<DocFiscale> docFiscali = gdf.getDocFiscaliByCliente(cliente);
 
-        docFiscali.stream().forEach((DocFiscale doc) -> doc.toString());
+        if (docFiscali.isEmpty()) {
+            System.out.println("Nessun documento fiscale trovato");
+        } else {
+            docFiscali.stream().forEach((DocFiscale doc) -> doc.toString());
+        }
     }
 
     private static void elencoClienti() {

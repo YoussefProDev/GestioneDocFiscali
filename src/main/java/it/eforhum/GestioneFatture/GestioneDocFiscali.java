@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.print.Doc;
 
 public class GestioneDocFiscali {
     HashMap<String, DocFiscale> docFiscali;
@@ -21,11 +20,10 @@ public class GestioneDocFiscali {
         LocalDate date = LocalDate.parse(data, DateTimeFormatter.ISO_DATE);
         int lastId = getLastId(date.getYear());
         DocFiscale docFiscale = new DocFiscale(lastId, descrizione, date , importo, idCliente);
-        DocFiscale docFiscale = new DocFiscale(lastId, descrizione, date , importo,idCliente);
         docFiscali.put(docFiscale.getId(), docFiscale);
         lastCodicePerAnno.put(date.getYear(), lastId + 1);
     }   
-    
+
     public List<DocFiscale> getDocFiscaliByCliente(String idCliente) {
         List<DocFiscale> fattureCliente = docFiscali.values().stream()
                 .filter(doc -> doc.getIdCliente().equals(idCliente))
