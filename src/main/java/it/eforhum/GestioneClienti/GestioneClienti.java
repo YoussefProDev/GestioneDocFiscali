@@ -6,8 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import static it.eforhum.App.DELIMITER;
 public class GestioneClienti {
+  
     private ArrayList<Cliente> allClienti;
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -75,7 +76,7 @@ public class GestioneClienti {
             Cliente Cliente = new Cliente(ClienteId, denominazione, partitaIva, indirizzo);
             this.allClienti.add(Cliente);
             myWriter.write(
-                    Cliente.getDenominazione() + "\t" + Cliente.getPartitaIva() + "\t" + Cliente.getIndirizzo() + "\t");
+                    Cliente.getDenominazione() + DELIMITER + Cliente.getPartitaIva() + DELIMITER + Cliente.getIndirizzo());
             myWriter.close();
             return Cliente;
 
@@ -95,7 +96,7 @@ public class GestioneClienti {
             File myObj = new File("Clienti.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
-                String[] data = myReader.nextLine().split("\t");
+                String[] data = myReader.nextLine().split(DELIMITER);
                 Clienti.add(new Cliente(data[0], data[1], data[2], data[3]));
             }
             myReader.close();

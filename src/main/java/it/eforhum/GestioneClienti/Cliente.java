@@ -28,4 +28,12 @@ public class Cliente {
     public String getIndirizzo() {
         return indirizzo;
     }
+
+    @Override
+    public String toString() {
+        return "ID: " + id + "\n" +
+                "Denominazione: " + denominazione + "\n" +
+                "Partita IVA: " + partitaIva + "\n" +
+                "Indirizzo: " + indirizzo;
+    }
 }
